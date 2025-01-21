@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Selección de Jugadores</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Fichajes</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Selecciona tus Jugadores para el Futbol 5 del finde</h1>
-    </div>
-    <script src="main.js"></script>
+  <div class="container">
+    <h1>Simulador de Fichajes</h1>
+    <div class="budget">Presupuesto: $<span id="budget">5000000</span></div>
+    <h2>Jugadores disponibles</h2>
+    <div id="player-list"></div>
+    <h2>Equipo Seleccionado</h2>
+    <ul id="team-list"></ul>
+    <button id="reset-btn">Reiniciar Simulación</button>
+  </div>
+  <script src="main.js"></script>
 </body>
 </html>
