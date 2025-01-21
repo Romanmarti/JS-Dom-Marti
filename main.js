@@ -1,113 +1,148 @@
-
-let jugadorSeleccionado;
-const equipo = [];
-let presupuesto = 5000000; 
-// Objetos, lista de jugadores
+//lista de jugadores a fichar
 const jugadores = [
-  { id: 1, nombre: "Lionel Messi", precio: 1000000, equipo: "Inter Miami", nacionalidad: "Argentina" },
-  { id: 2, nombre: "Cristiano Ronaldo", precio: 950000, equipo: "Al-Nassr", nacionalidad: "Portugal" },
-  { id: 3, nombre: "Kylian Mbappé", precio: 1200000, equipo: "PSG", nacionalidad: "Francia" },
-  { id: 4, nombre: "Erling Haaland", precio: 1100000, equipo: "Manchester City", nacionalidad: "Noruega" },
-  { id: 5, nombre: "Ángel Di María", precio: 850000, equipo: "Benfica", nacionalidad: "Argentina" },
-  { id: 6, nombre: "Paulo Dybala", precio: 900000, equipo: "Roma", nacionalidad: "Argentina" },
-  { id: 7, nombre: "Lautaro Martínez", precio: 950000, equipo: "Inter de Milán", nacionalidad: "Argentina" },
-  { id: 8, nombre: "Emiliano Martínez", precio: 800000, equipo: "Aston Villa", nacionalidad: "Argentina" },
-  { id: 9, nombre: "Bernardo Silva", precio: 920000, equipo: "Manchester City", nacionalidad: "Portugal" },
-  { id: 10, nombre: "Bruno Fernandes", precio: 880000, equipo: "Manchester United", nacionalidad: "Portugal" },
-  { id: 11, nombre: "João Félix", precio: 870000, equipo: "Barcelona", nacionalidad: "Portugal" },
-  { id: 12, nombre: "Rúben Dias", precio: 890000, equipo: "Manchester City", nacionalidad: "Portugal" },
-  { id: 13, nombre: "Neymar Jr.", precio: 1150000, equipo: "Al-Hilal", nacionalidad: "Brasil" },
-  { id: 14, nombre: "Vinícius Jr.", precio: 1120000, equipo: "Real Madrid", nacionalidad: "Brasil" },
-  { id: 15, nombre: "Casemiro", precio: 1050000, equipo: "Manchester United", nacionalidad: "Brasil" },
-  { id: 16, nombre: "Alisson Becker", precio: 950000, equipo: "Liverpool", nacionalidad: "Brasil" },
-  { id: 17, nombre: "Antoine Griezmann", precio: 880000, equipo: "Atlético de Madrid", nacionalidad: "Francia" },
-  { id: 18, nombre: "Olivier Giroud", precio: 840000, equipo: "AC Milan", nacionalidad: "Francia" },
-  { id: 19, nombre: "N'Golo Kanté", precio: 890000, equipo: "Al-Ittihad", nacionalidad: "Francia" },
-  { id: 20, nombre: "Kingsley Coman", precio: 870000, equipo: "Bayern Múnich", nacionalidad: "Francia" },
+  { id: 1, nombre: "Lionel Messi", precio: 1000000, equipo: "Inter Miami", nacionalidad: "Argentina", puntuacion: 95 },
+  { id: 2, nombre: "Cristiano Ronaldo", precio: 950000, equipo: "Al-Nassr", nacionalidad: "Portugal", puntuacion: 92 },
+  { id: 3, nombre: "Kylian Mbappé", precio: 1200000, equipo: "PSG", nacionalidad: "Francia", puntuacion: 97 },
+  { id: 4, nombre: "Erling Haaland", precio: 1100000, equipo: "Manchester City", nacionalidad: "Noruega", puntuacion: 96 },
+  { id: 5, nombre: "Ángel Di María", precio: 850000, equipo: "Benfica", nacionalidad: "Argentina", puntuacion: 89 },
+  { id: 6, nombre: "Paulo Dybala", precio: 900000, equipo: "Roma", nacionalidad: "Argentina", puntuacion: 88 },
+  { id: 7, nombre: "Lautaro Martínez", precio: 950000, equipo: "Inter de Milán", nacionalidad: "Argentina", puntuacion: 90 },
+  { id: 8, nombre: "Emiliano Martínez", precio: 800000, equipo: "Aston Villa", nacionalidad: "Argentina", puntuacion: 87 },
+  { id: 9, nombre: "Bernardo Silva", precio: 920000, equipo: "Manchester City", nacionalidad: "Portugal", puntuacion: 91 },
+  { id: 10, nombre: "Bruno Fernandes", precio: 880000, equipo: "Manchester United", nacionalidad: "Portugal", puntuacion: 90 },
+  { id: 11, nombre: "João Félix", precio: 870000, equipo: "Barcelona", nacionalidad: "Portugal", puntuacion: 88 },
+  { id: 12, nombre: "Rúben Dias", precio: 890000, equipo: "Manchester City", nacionalidad: "Portugal", puntuacion: 89 },
+  { id: 13, nombre: "Neymar Jr.", precio: 1150000, equipo: "Al-Hilal", nacionalidad: "Brasil", puntuacion: 94 },
+  { id: 14, nombre: "Vinícius Jr.", precio: 1120000, equipo: "Real Madrid", nacionalidad: "Brasil", puntuacion: 93 },
+  { id: 15, nombre: "Casemiro", precio: 1050000, equipo: "Manchester United", nacionalidad: "Brasil", puntuacion: 92 },
+  { id: 16, nombre: "Alisson Becker", precio: 950000, equipo: "Liverpool", nacionalidad: "Brasil", puntuacion: 91 },
+  { id: 17, nombre: "Antoine Griezmann", precio: 880000, equipo: "Atlético de Madrid", nacionalidad: "Francia", puntuacion: 89 },
+  { id: 18, nombre: "Olivier Giroud", precio: 840000, equipo: "AC Milan", nacionalidad: "Francia", puntuacion: 86 },
+  { id: 19, nombre: "N'Golo Kanté", precio: 890000, equipo: "Al-Ittihad", nacionalidad: "Francia", puntuacion: 88 },
+  { id: 20, nombre: "Kingsley Coman", precio: 870000, equipo: "Bayern Múnich", nacionalidad: "Francia", puntuacion: 87 },
 ];
 
+let presupuesto = 5000000;
+const equipo = [];
+
+const playerListDiv = document.getElementById("player-list");
+const budgetSpan = document.getElementById("budget");
+const teamList = document.getElementById("team-list");
+const resetBtn = document.getElementById("reset-btn");
+
+// Almacenar y recuperar datos en LocalStorage
+function guardarDatos() {
+  localStorage.setItem("equipo", JSON.stringify(equipo));
+  localStorage.setItem("presupuesto", presupuesto);
+}
+
+function cargarDatos() {
+  const equipoGuardado = JSON.parse(localStorage.getItem("equipo")) || [];
+  const presupuestoGuardado = localStorage.getItem("presupuesto");
+
+  equipo.push(...equipoGuardado);
+  presupuesto = presupuestoGuardado ? parseInt(presupuestoGuardado) : 5000000;
+
+  actualizarEquipo();
+}
+
+// Muestra de jugadores
 function mostrarJugadores() {
-  let lista = "Jugadores disponibles:\n";
-  jugadores.forEach((jugador) => {
-    lista += `${jugador.id}. ${jugador.nombre} - $${jugador.precio} - Equipo: ${jugador.equipo} - Nacionalidad: ${jugador.nacionalidad}\n`;
-  });
-  alert(lista);
+  playerListDiv.innerHTML = jugadores
+    .map(
+      ({ id, nombre, equipo, nacionalidad, precio }) => `
+      <div class="player-card">
+        <h3>${nombre}</h3>
+        <p>Equipo: ${equipo}</p>
+        <p>Nacionalidad: ${nacionalidad}</p>
+        <p>Precio: $${precio}</p>
+        <div class="actions">
+          <button onclick="ficharJugador(${id})">Fichar</button>
+        </div>
+      </div>`
+    )
+    .join("");
 }
 
-function capturarDatos() {
-  mostrarJugadores();
-
-  const idJugador = parseInt(prompt("Ingrese el ID del jugador que desea contratar:"));
-  jugadorSeleccionado = jugadores.find((jugador) => jugador.id === idJugador);
-  if (!jugadorSeleccionado) {
-    alert("Jugador no encontrado. Intente de nuevo.");
+// Funcion para fichar al jugador
+function ficharJugador(id) {
+  if (equipo.length >= 5) {
+    calcularResultados();
     return;
   }
-  agregarAlEquipo(jugadorSeleccionado);
-}
 
-function agregarAlEquipo(jugador) {
-  if (equipo.some((j) => j.id === jugador.id)) {
-    alert("Este jugador ya está en tu equipo.");
+  const jugador = jugadores.find((j) => j.id === id);
+  if (equipo.includes(jugador)) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "error",
+      title: "Este jugador ya está en tu equipo"
+    });
     return;
   }
-  presupuesto -= jugador.precio; 
-  alert(`${jugador.nombre} ha sido fichado.`);
+  if (presupuesto < jugador.precio) {
+    Swal.fire({
+      title: "No tienes suficiente presupuesto",
+      html: `
+        <p>Reinicia el simulador y revisa tus gastos.</p>`,
+      icon: "error",
+    });
+    return;
+  }
+
   equipo.push(jugador);
-  alert(`Se agregó a ${jugador.nombre} al equipo.`);
-}
-function mostrarPresupuesto() {
-  alert(`Presupuesto disponible: $${presupuesto}`);
+  presupuesto -= jugador.precio;
+  actualizarEquipo();
+  guardarDatos();
 }
 
-function mostrarEquipo() {
-  if (equipo.length === 0) {
-    alert("El equipo está vacío.");
-    return;
-  }
-  let detalleEquipo = "Equipo actual:\n";
-  equipo.forEach((jugador, index) => {
-    detalleEquipo += `${index + 1}. ${jugador.nombre} - Equipo: ${jugador.equipo} - Nacionalidad: ${jugador.nacionalidad}\n`;
+// Actualiza equipo y presupuesto
+function actualizarEquipo() {
+  teamList.innerHTML = equipo
+    .map(
+      ({ nombre, equipo, precio }) => `
+      <li>${nombre} (${equipo}) - $${precio}</li>`
+    )
+    .join("");
+
+  budgetSpan.textContent = presupuesto;
+}
+
+// Resultados
+function calcularResultados() {
+  const presupuestoGastado = 5000000 - presupuesto;
+  const puntuacionTotal = equipo.reduce((total, { puntuacion }) => total + puntuacion, 0);
+
+  Swal.fire({
+    title: "¡Felicitaciones!",
+    html: `
+      <p>Has armado un gran equipo.</p>
+      <p><strong>Presupuesto gastado:</strong> $${presupuestoGastado}</p>
+      <p><strong>Puntuación total del equipo:</strong> ${puntuacionTotal}</p>
+    `,
+    icon: "success",
   });
-  alert(detalleEquipo);
 }
 
-function filtrarJugadoresPorNacionalidad() {
-  const nacionalidad = prompt("Ingrese la nacionalidad por la que desea filtrar (e.g., Argentina, Portugal, Brasil, Francia):");
-  const filtrados = jugadores.filter((jugador) => jugador.nacionalidad.toLowerCase() === nacionalidad.toLowerCase());
-  
-  if (filtrados.length === 0) {
-    alert(`No se encontraron jugadores de nacionalidad ${nacionalidad}.`);
-    return;
-  }
-  
-  let listaFiltrados = `Jugadores de nacionalidad ${nacionalidad}:\n`;
-  filtrados.forEach((jugador) => {
-    listaFiltrados += `${jugador.id}. ${jugador.nombre} - $${jugador.precio} - Equipo: ${jugador.equipo}\n`;
-  });
-  
-  alert(listaFiltrados);
-  
-  const idJugador = parseInt(prompt("Ingrese el ID del jugador que desea contratar:"));
-  const jugadorSeleccionado = filtrados.find((jugador) => jugador.id === idJugador);
-  
-  if (!jugadorSeleccionado) {
-    alert("Jugador no encontrado. Intente de nuevo.");
-    return;
-  }
-  if (jugadorSeleccionado.precio > presupuesto) {
-    alert("No tienes suficiente presupuesto para fichar a este jugador.");
-    return;
-}
-agregarAlEquipo(jugadorSeleccionado);
-}
+// reinicio de simulacion de fichajes
+resetBtn.addEventListener("click", () => {
+  presupuesto = 5000000;
+  equipo.length = 0;
+  localStorage.clear();
+  actualizarEquipo();
+  mostrarJugadores();
+});
 
-// Ejecucion
-do {
-  mostrarPresupuesto();
-  filtrarJugadoresPorNacionalidad();
-  mostrarEquipo();
-} while (equipo.length < 5);
 
-alert("¡Felicidades! Has formado tu equipo de 5 jugadores.");
-mostrarEquipo();
+cargarDatos();
+mostrarJugadores();
