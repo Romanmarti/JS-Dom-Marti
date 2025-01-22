@@ -1,6 +1,6 @@
 //lista de jugadores a fichar
 const jugadores = [
-  { id: 1, nombre: "Lionel Messi", precio: 1000000, equipo: "Inter Miami", nacionalidad: "Argentina", puntuacion: 95 },
+  { id: 1, nombre: "Lionel Messi GOAT", precio: 2000000, equipo: "Inter Miami", nacionalidad: "Argentina", puntuacion: 95 },
   { id: 2, nombre: "Cristiano Ronaldo", precio: 950000, equipo: "Al-Nassr", nacionalidad: "Portugal", puntuacion: 92 },
   { id: 3, nombre: "Kylian Mbappé", precio: 1200000, equipo: "PSG", nacionalidad: "Francia", puntuacion: 97 },
   { id: 4, nombre: "Erling Haaland", precio: 1100000, equipo: "Manchester City", nacionalidad: "Noruega", puntuacion: 96 },
@@ -50,7 +50,7 @@ const budgetSpan = document.getElementById("budget");
 const teamList = document.getElementById("team-list");
 const resetBtn = document.getElementById("reset-btn");
 
-// Almacenar y recuperar datos en LocalStorage
+// Almacenar y recuperar datos en local storage
 function guardarDatos() {
   localStorage.setItem("equipo", JSON.stringify(equipo));
   localStorage.setItem("presupuesto", presupuesto);
@@ -61,7 +61,7 @@ function cargarDatos() {
   const presupuestoGuardado = localStorage.getItem("presupuesto");
 
   equipo.push(...equipoGuardado);
-  presupuesto = presupuestoGuardado ? parseInt(presupuestoGuardado) : 5000000;
+  presupuesto = presupuestoGuardado ? parseInt(presupuestoGuardado) : 15000000;
 
   actualizarEquipo();
 }
