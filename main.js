@@ -20,9 +20,29 @@ const jugadores = [
   { id: 18, nombre: "Olivier Giroud", precio: 840000, equipo: "AC Milan", nacionalidad: "Francia", puntuacion: 86 },
   { id: 19, nombre: "N'Golo Kanté", precio: 890000, equipo: "Al-Ittihad", nacionalidad: "Francia", puntuacion: 88 },
   { id: 20, nombre: "Kingsley Coman", precio: 870000, equipo: "Bayern Múnich", nacionalidad: "Francia", puntuacion: 87 },
-];
-
-let presupuesto = 5000000;
+  { id: 21, nombre: "Jude Bellingham", precio: 1200000, equipo: "Real Madrid", nacionalidad: "Inglaterra", puntuacion: 96 },
+  { id: 22, nombre: "Bukayo Saka", precio: 1100000, equipo: "Arsenal", nacionalidad: "Inglaterra", puntuacion: 94 },
+  { id: 23, nombre: "Harry Kane", precio: 1150000, equipo: "Bayern Múnich", nacionalidad: "Inglaterra", puntuacion: 95 },
+  { id: 24, nombre: "Victor Osimhen", precio: 1050000, equipo: "Napoli", nacionalidad: "Nigeria", puntuacion: 92 },
+  { id: 25, nombre: "Khvicha Kvaratskhelia", precio: 1000000, equipo: "Napoli", nacionalidad: "Georgia", puntuacion: 91 },
+  { id: 26, nombre: "Rodri Hernández", precio: 1100000, equipo: "Manchester City", nacionalidad: "España", puntuacion: 94 },
+  { id: 27, nombre: "Gavi", precio: 950000, equipo: "Barcelona", nacionalidad: "España", puntuacion: 90 },
+  { id: 28, nombre: "Pedri", precio: 1000000, equipo: "Barcelona", nacionalidad: "España", puntuacion: 92 },
+  { id: 29, nombre: "Martin Ødegaard", precio: 1050000, equipo: "Arsenal", nacionalidad: "Noruega", puntuacion: 93 },
+  { id: 30, nombre: "Kim Min-jae", precio: 920000, equipo: "Bayern Múnich", nacionalidad: "Corea del Sur", puntuacion: 89 },
+  { id: 31, nombre: "Enzo Fernández", precio: 970000, equipo: "Chelsea", nacionalidad: "Argentina", puntuacion: 91 },
+  { id: 32, nombre: "Moisés Caicedo", precio: 950000, equipo: "Chelsea", nacionalidad: "Ecuador", puntuacion: 90 },
+  { id: 33, nombre: "Rafael Leão", precio: 1080000, equipo: "AC Milan", nacionalidad: "Portugal", puntuacion: 93 },
+  { id: 34, nombre: "Alexis Mac Allister", precio: 940000, equipo: "Liverpool", nacionalidad: "Argentina", puntuacion: 90 },
+  { id: 35, nombre: "Joško Gvardiol", precio: 1000000, equipo: "Manchester City", nacionalidad: "Croacia", puntuacion: 92 },
+  { id: 36, nombre: "Sandro Tonali", precio: 920000, equipo: "Newcastle United", nacionalidad: "Italia", puntuacion: 89 },
+  { id: 37, nombre: "Fede Valverde", precio: 1100000, equipo: "Real Madrid", nacionalidad: "Uruguay", puntuacion: 94 },
+  { id: 38, nombre: "Leroy Sané", precio: 980000, equipo: "Bayern Múnich", nacionalidad: "Alemania", puntuacion: 91 },
+  { id: 39, nombre: "Marcus Rashford", precio: 1050000, equipo: "Manchester United", nacionalidad: "Inglaterra", puntuacion: 92 },
+  { id: 40, nombre: "Theo Hernández", precio: 960000, equipo: "AC Milan", nacionalidad: "Francia", puntuacion: 91 },
+  ];
+  
+let presupuesto = 15000000;
 const equipo = [];
 
 const playerListDiv = document.getElementById("player-list");
@@ -66,8 +86,8 @@ function mostrarJugadores() {
 
 // Funcion para fichar al jugador
 function ficharJugador(id) {
-  if (equipo.length >= 5) {
-    calcularResultados();
+  if (equipo.length >= 11) {
+    calcularResultados(); // Llama a la función que muestra los resultados.
     return;
   }
 
@@ -90,6 +110,7 @@ function ficharJugador(id) {
     });
     return;
   }
+
   if (presupuesto < jugador.precio) {
     Swal.fire({
       title: "No tienes suficiente presupuesto",
@@ -104,7 +125,9 @@ function ficharJugador(id) {
   presupuesto -= jugador.precio;
   actualizarEquipo();
   guardarDatos();
+
 }
+
 
 // Actualiza equipo y presupuesto
 function actualizarEquipo() {
@@ -120,7 +143,7 @@ function actualizarEquipo() {
 
 // Resultados
 function calcularResultados() {
-  const presupuestoGastado = 5000000 - presupuesto;
+  const presupuestoGastado = 15000000- presupuesto;
   const puntuacionTotal = equipo.reduce((total, { puntuacion }) => total + puntuacion, 0);
 
   Swal.fire({
@@ -136,7 +159,7 @@ function calcularResultados() {
 
 // reinicio de simulacion de fichajes
 resetBtn.addEventListener("click", () => {
-  presupuesto = 5000000;
+  presupuesto = 15000000;
   equipo.length = 0;
   localStorage.clear();
   actualizarEquipo();

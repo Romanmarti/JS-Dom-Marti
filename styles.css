@@ -1,73 +1,92 @@
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-  }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  .budget {
-    font-weight: bold;
-    margin: 20px 0;
-  }
-  #player-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    gap: 15px; /* Espacio entre las tarjetas */
-  }
-  .player-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  .player-card h3 {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  .player-card p {
-    margin: 5px 0;
-    font-size: 14px;
-  }
-  .actions button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .actions button:hover {
-    background-color: #0056b3;
-  }
-  #team-list {
-    list-style: none;
-    padding: 0;
-  }
-  #team-list li {
-    margin: 5px 0;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #e9ecef;
-  }
-  #reset-btn {
-    margin-top: 20px;
-    padding: 10px 15px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  #reset-btn:hover {
-    background-color: #bd2130;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 40px;
+  font-size: 1.5rem;
+}
+
+.budget {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+#team-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Estilos de las listas de jugadores y DT */
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.player-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  width: 200px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.player-card:hover {
+  transform: scale(1.05);
+}
+
+.player-card h3{
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.player-card p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+
